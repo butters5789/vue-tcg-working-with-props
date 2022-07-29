@@ -8,10 +8,12 @@
       <friend-contact
         v-for="friend in friends"
         :key="friend.id"
+        :id="friend.id"
         :name="friend.name"
         :phone-number="friend.phone"
         :email-address="friend.email"
         :is-favorite="friend.isFavorite"
+        @toggle-is-favorite="toggleIsFavorite"
       />
     </ul>
   </section>
@@ -46,6 +48,13 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    toggleIsFavorite(id) {
+      const foundFriend = this.friends.find((friend) => friend.id === id);
+
+      foundFriend.isFavorite = !foundFriend.isFavorite;
+    },
   },
 };
 </script>

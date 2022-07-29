@@ -1,6 +1,6 @@
 <template>
   <li>
-    <h2>{{ name }} <span v-if="showFavoriteFlag">(favorite)</span></h2>
+    <h2>{{ name }} <span v-if="isFavorite">(favorite)</span></h2>
 
     <button @click="toggleFavoriteFriend">Favorite Friend</button>
 
@@ -17,6 +17,10 @@
 export default {
   name: 'friend-contact',
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -38,7 +42,6 @@ export default {
   data() {
     return {
       showDetails: false,
-      showFavoriteFlag: this.isFavorite,
     };
   },
   computed: {
@@ -55,7 +58,7 @@ export default {
       this.showDetails = !this.showDetails;
     },
     toggleFavoriteFriend() {
-      this.showFavoriteFlag = !this.showFavoriteFlag;
+      this.$emit('toggle-is-favorite', this.id);
     },
   },
 };
