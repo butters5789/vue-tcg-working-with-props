@@ -1,6 +1,8 @@
 <template>
   <li>
-    <h2>{{ name }}</h2>
+    <h2>{{ name }} <span v-if="showFavoriteFlag">(favorite)</span></h2>
+
+    <button @click="toggleFavoriteFriend">Favorite Friend</button>
 
     <button @click="toggleDetails">{{ detailsButtonText }}</button>
 
@@ -14,14 +16,29 @@
 <script>
 export default {
   name: 'friend-contact',
-  props: [
-    'name',
-    'phoneNumber',
-    'emailAddress',
-  ],
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
+    emailAddress: {
+      type: String,
+      required: true,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    isFavorite: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   data() {
     return {
       showDetails: false,
+      showFavoriteFlag: this.isFavorite,
     };
   },
   computed: {
@@ -36,6 +53,9 @@ export default {
   methods: {
     toggleDetails() {
       this.showDetails = !this.showDetails;
+    },
+    toggleFavoriteFriend() {
+      this.showFavoriteFlag = !this.showFavoriteFlag;
     },
   },
 };

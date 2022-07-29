@@ -6,15 +6,12 @@
 
     <ul>
       <friend-contact
-        name="Brad Butterfield"
-        phone-number="123-456-7890"
-        email-address="brad.butterfield@aol.com"
-      />
-
-      <friend-contact
-        name="Joe Shmoe"
-        phone-number="234-567-8901"
-        email-address="joe.shmoe@aol.com"
+        v-for="friend in friends"
+        :key="friend.id"
+        :name="friend.name"
+        :phone-number="friend.phone"
+        :email-address="friend.email"
+        :is-favorite="friend.isFavorite"
       />
     </ul>
   </section>
@@ -23,6 +20,33 @@
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      friends: [
+        {
+          id: '1',
+          name: 'Brad Butterfield',
+          email: 'brad.butterfield@aol.com',
+          phone: '123-456-7890',
+          isFavorite: true,
+        },
+        {
+          id: '2',
+          name: 'John Begone',
+          email: 'john.begone@aol.com',
+          phone: '234-567-8901',
+          isFavorite: false,
+        },
+        {
+          id: '3',
+          name: 'Doe Rughrow',
+          email: 'doe.rughrow@aol.com',
+          phone: '345-678-9012',
+          isFavorite: false,
+        },
+      ],
+    };
+  },
 };
 </script>
 
